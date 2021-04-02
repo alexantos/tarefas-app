@@ -1,0 +1,79 @@
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col">
+            <h1>Tarefas</h1>
+        </div>
+        <div class="col" align="end">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Adicionar</button>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-md-center">
+    <div class="col-sm-10 mt-4 clicavel" *ngFor="let tarefa of tarefas" >
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+            <div class="col" data-bs-toggle="modal" data-bs-target="#modalAtualizar" (click)="selecionaTarefa(tarefa)">
+              <h5 class="card-title">{{tarefa.descricao}} </h5>
+              <p class="card-text">{{tarefa.data_criacao|date:'dd/MM/YYYY'}}</p>
+              <p class="card-text">{{tarefa.data_hora_realizado}}</p>
+            </div>
+            <div class="col fa-lg" align="end">
+              <button *ngIf="tarefa.realizado" (click)="realizaTarefa(tarefa, $event)" class="btn-transparente verde"><i class="fas fa-check"></i></button>
+              <button *ngIf="!tarefa.realizado" (click)="realizaTarefa(tarefa, $event)" class="btn-transparente vermelho"><i class="fas fa-exclamation-triangle"></i></button>
+            </div>
+            <div align="end">
+              <button (click)="deletaTarefa(tarefa, $event)" class="btn-transparente" ><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- Modal Criar -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Criar Tarefa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <input type="text" class="form-control" [(ngModel)]="descricao">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="adicionarTarefa()" data-bs-dismiss="modal">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Alterar -->
+<div class="modal fade" id="modalAtualizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Atualizar Tarefa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <input type="text" class="form-control" [(ngModel)]="tarefa_atualizar.descricao">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="atualizaDescricao()" data-bs-dismiss="modal">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
