@@ -13,8 +13,6 @@ export class TarefasComponent implements OnInit {
 
   descricao: string = '';
 
-  descricao_atualizar: string = '';
-
   tarefa_atualizar: TarefaModel = {descricao:''};
 
   constructor(
@@ -23,6 +21,7 @@ export class TarefasComponent implements OnInit {
 
   ngOnInit(): void {
    this.todasTarefas();
+   this.tarefas.push({descricao:"Teste Android"})
   }
 
   todasTarefas(){
