@@ -1,0 +1,17 @@
+<h2>Tarefa</h2>
+<mat-form-field appearance="legacy">
+  <mat-label>Descrição</mat-label>
+  <input matInput [(ngModel)]="tarefa.descricao">
+</mat-form-field>
+<mat-form-field appearance="legacy">
+  <mat-label>Prioridade</mat-label>
+  <mat-select [(ngModel)]="tarefa.prioridade">
+    <mat-option *ngFor="let prioridade of prioridades" [value]="prioridade">
+      {{prioridade}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <button mat-flat-button (click)="fechaModal()">Cancelar</button>
+  <button mat-flat-button (click)="salvaTarefa()">Salvar</button>
+</div>

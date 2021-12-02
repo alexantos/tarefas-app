@@ -13,10 +13,13 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TarefaComponent } from './tarefa/tarefa.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [AppComponent, TarefasComponent],
+  declarations: [AppComponent, TarefasComponent, TarefaComponent],
   imports: [
     FlexLayoutModule,
     BrowserModule,
@@ -29,7 +32,9 @@ import {MatChipsModule} from '@angular/material/chips';
     FormsModule,
     MatFormFieldModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
