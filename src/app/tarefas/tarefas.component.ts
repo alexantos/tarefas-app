@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TarefaService } from '../tarefa.service';
-import { TarefaModel } from './tarefa.model';
+import { Tarefa } from './tarefa.model';
 
 @Component({
   selector: 'app-tarefas',
@@ -9,18 +9,22 @@ import { TarefaModel } from './tarefa.model';
 })
 export class TarefasComponent implements OnInit {
 
-  tarefas: TarefaModel[] = [];
+  tarefas: Tarefa[] = [];
 
   descricao: string = '';
 
-  tarefa_atualizar: TarefaModel = {descricao:''};
+  tarefa_atualizar: Tarefa = {descricao:''};
+
+  prioridades: string[] = ['Máxima', 'Média', 'Mínima'];
+
+  prioridade: string = '';
 
   constructor(
     private tarefaService: TarefaService
   ) { }
 
   ngOnInit(): void {
-   this.todasTarefas();
+  //  this.todasTarefas();
    this.tarefas.push({descricao:"Teste Android"})
   }
 
@@ -31,43 +35,45 @@ export class TarefasComponent implements OnInit {
   }
 
   adicionarTarefa() {
-    let tarefa: TarefaModel = {
-      descricao: this.descricao
+    let tarefa: Tarefa = {
+      descricao: this.descricao,
+      prioridade: this.prioridade
     }
-    this.tarefaService.criaTarefa(tarefa).subscribe((result)=>{
-      this.todasTarefas();
-    })
+    this.tarefas.push(tarefa)
+    // this.tarefaService.criaTarefa(tarefa).subscribe((result)=>{
+    //   this.todasTarefas();
+    // })
   }
 
-  selecionaTarefa(tarefa:TarefaModel){
+  selecionaTarefa(tarefa:Tarefa){
     this.tarefa_atualizar = tarefa;
   }
 
-  realizaTarefa(tarefa:TarefaModel, event:Event){
+  realizaTarefa(tarefa:Tarefa, event:Event){
     event.stopPropagation();
     tarefa.realizado = !tarefa.realizado;
     if(tarefa.realizado){
       // let data = new Date("YYYY-MM-DDTHH:mm:ss.sTZD");
       // tarefa.data_hora_realizado = data.toString();
     }
-    this.atualizaTarefa(tarefa)
+    // this.atualizaTarefa(tarefa)
   }
 
-  atualizaTarefa(tarefa:TarefaModel){
-    this.tarefaService.atualizarTarefa(tarefa).subscribe((result)=>{
-      this.todasTarefas();
-    });
+  atualizaTarefa(tarefa:Tarefa){
+    // this.tarefaService.atualizarTarefa(tarefa).subscribe((result)=>{
+    //   this.todasTarefas();
+    // });
   }
 
   atualizaDescricao(){
     this.atualizaTarefa(this.tarefa_atualizar);
   }
 
-  deletaTarefa(tarefa:TarefaModel, event:Event){
-    event.stopPropagation();
-    this.tarefaService.deletaTarefa(tarefa).subscribe((result)=>{
-      this.todasTarefas();
-    })
+  deletaTarefa(tarefa:Tarefa, event:Event){
+    this.tarefas.splice(this.tarefas.indexOf(tarefa), 1)
+    // this.tarefaService.deletaTarefa(tarefa).subscribe((result)=>{
+    //   this.todasTarefas();
+    // })
   }
 
 }

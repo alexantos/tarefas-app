@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TarefaModel } from './tarefas/tarefa.model';
+import { Tarefa } from './tarefas/tarefa.model';
 
 
 @Injectable({
@@ -13,18 +13,18 @@ export class TarefaService {
   ) {}
 
   todasTarefas(){
-    return this.http.get<TarefaModel[]>('http://165.227.96.131:8000/tarefas/');
+    return this.http.get<Tarefa[]>('http://165.227.96.131:8000/tarefas/');
   }
 
-  criaTarefa(tarefa: TarefaModel){
-    return this.http.post<TarefaModel>('http://165.227.96.131:8000/tarefas/', tarefa);
+  criaTarefa(tarefa: Tarefa){
+    return this.http.post<Tarefa>('http://165.227.96.131:8000/tarefas/', tarefa);
   }
 
-  atualizarTarefa(tarefa: TarefaModel){
-    return this.http.patch<TarefaModel>('http://165.227.96.131:8000/tarefas/'+String(tarefa.id)+'/', tarefa);
+  atualizarTarefa(tarefa: Tarefa){
+    return this.http.patch<Tarefa>('http://165.227.96.131:8000/tarefas/'+String(tarefa.id)+'/', tarefa);
   }
 
-  deletaTarefa(tarefa:TarefaModel){
-    return this.http.delete<TarefaModel>('http://165.227.96.131:8000/tarefas/'+String(tarefa.id)+'/')
+  deletaTarefa(tarefa:Tarefa){
+    return this.http.delete<Tarefa>('http://165.227.96.131:8000/tarefas/'+String(tarefa.id)+'/')
   }
 }

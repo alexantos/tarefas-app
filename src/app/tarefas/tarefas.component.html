@@ -7,14 +7,12 @@
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Adicionar</button>
         </div>
     </div>
-
-
     <div class="row justify-content-md-center">
-    <div class="col-sm-10 mt-4 clicavel" *ngFor="let tarefa of tarefas" >
+    <div class="col-sm-10 mt-4" *ngFor="let tarefa of tarefas" >
         <div class="card">
           <div class="card-body">
             <div class="row">
-            <div class="col" data-bs-toggle="modal" data-bs-target="#modalAtualizar" (click)="selecionaTarefa(tarefa)">
+            <div class="col" >
               <h5 class="card-title">{{tarefa.descricao}} </h5>
               <p class="card-text">{{tarefa.data_criacao|date:'dd/MM/YYYY'}}</p>
               <p class="card-text">{{tarefa.data_hora_realizado}}</p>
@@ -23,8 +21,14 @@
               <button *ngIf="tarefa.realizado" (click)="realizaTarefa(tarefa, $event)" class="btn-transparente verde"><i class="fas fa-check"></i></button>
               <button *ngIf="!tarefa.realizado" (click)="realizaTarefa(tarefa, $event)" class="btn-transparente vermelho"><i class="fas fa-exclamation-triangle"></i></button>
             </div>
-            <div align="end">
-              <button (click)="deletaTarefa(tarefa, $event)" class="btn-transparente" ><i class="fas fa-trash"></i></button>
+            <div class="row">
+              <div>
+                {{tarefa.prioridade}}
+              </div>
+              <div class="col" align="end">
+                <button data-bs-toggle="modal" data-bs-target="#modalAtualizar" (click)="selecionaTarefa(tarefa)" class="btn-transparente" ><i class="fas fa-edit"></i></button>
+                <button (click)="deletaTarefa(tarefa, $event)" class="btn-transparente" ><i class="fas fa-trash"></i></button>
+              </div>
             </div>
           </div>
           </div>
@@ -47,6 +51,12 @@
             <label class="form-label">Descrição</label>
             <input type="text" class="form-control" [(ngModel)]="descricao">
           </div>
+          <div class="form-group mb-3">
+            <label for="exampleFormControlSelect1">Prioridade</label>
+            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="prioridade">
+              <option *ngFor="let prioridade of prioridades">{{prioridade}}</option>
+            </select>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
@@ -68,6 +78,12 @@
           <div class="mb-3">
             <label class="form-label">Descrição</label>
             <input type="text" class="form-control" [(ngModel)]="tarefa_atualizar.descricao">
+          </div>
+          <div class="form-group mb-3">
+            <label for="exampleFormControlSelect1">Prioridade</label>
+            <select class="form-control">
+              <option *ngFor="let prioridade of prioridades">{{prioridade}}</option>
+            </select>
           </div>
       </div>
       <div class="modal-footer">

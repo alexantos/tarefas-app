@@ -1,10 +1,10 @@
 {
   "name": "tarefas",
   "displayName": "Tarefas",
-  "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "version": "0.0.1",
+  "description": "Aplicativo de tarefas para exemplo multiplataforma utilizando angular e cordova com extensão do electron",
   "main": "index.js",
-  "author": "Apache Cordova Team",
+  "author": "Alexandre Santos",
   "license": "Apache-2.0",
   "scripts": {
     "ng": "ng",
@@ -31,7 +31,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.6",
-    "@angular/cli": "~11.2.6",
     "@angular/compiler-cli": "~11.2.7",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
