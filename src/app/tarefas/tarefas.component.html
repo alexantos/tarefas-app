@@ -1,12 +1,27 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
-  <button mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
-  <button mat-icon-button>
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button>
-    <mat-icon>share</mat-icon>
-  </button>
-</mat-toolbar>
+<div style="padding: 1em">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h1>Tarefas</h1>
+    <button mat-mini-fab color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div *ngFor="let tarefa of tarefas">
+    <mat-card fxLayoutAlign="space-between center">
+      <mat-chip-list>
+        <mat-chip selected style="background-color: brown" *ngIf="tarefa.prioridade == 'Urgente'">Urgente</mat-chip>
+        <mat-chip selected style="background-color: dodgerblue" *ngIf="tarefa.prioridade == 'Média'">Média</mat-chip>
+        <mat-chip selected style="background-color: forestgreen" *ngIf="tarefa.prioridade == 'Tranquila'">Tranquila</mat-chip>
+      </mat-chip-list>
+      <p fxLayoutAlign="center center" style="margin: 0">{{tarefa.descricao}}</p>
+      <p fxLayoutAlign="center center" style="margin: 0">{{tarefa.data|date:'dd/MM/yyyy'}}</p>
+      <div>
+        <mat-chip >
+          <mat-icon style="cursor: pointer; color: red" *ngIf="!tarefa.finalizado">clear</mat-icon>
+          <mat-icon style="cursor: pointer; color: green" *ngIf="tarefa.finalizado">check</mat-icon>
+        </mat-chip>
+        <mat-icon style="cursor: pointer">delete</mat-icon>
+      </div>
+    </mat-card>
+    <br />
+  </div>
+</div>
