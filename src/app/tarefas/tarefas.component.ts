@@ -2,13 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TarefaComponent } from '../tarefa/tarefa.component';
 import { TarefasService } from '../tarefas.service';
-
-export interface Tarefa {
-  descricao?: string;
-  realizado?: boolean;
-  data?: Date;
-  prioridade?: string;
-}
+import { Tarefa } from '../tarefas.interface';
 
 @Component({
   selector: 'app-tarefas',
@@ -18,13 +12,16 @@ export interface Tarefa {
 export class TarefasComponent implements OnInit {
   tarefas: Tarefa[] = [];
 
-  constructor(public dialog: MatDialog, private tarefasService: TarefasService) {}
+  constructor(public dialog: MatDialog, private tarefasService: TarefasService) { }
 
   ngOnInit(): void {
-    this.tarefasService.listaTarefas().subscribe((tarefas) =>{
+    this.atualizaListaTarefas();
+  }
+
+  atualizaListaTarefas(){
+    this.tarefasService.listaTarefas().subscribe((tarefas) => {
       this.tarefas = tarefas;
     })
-    
   }
 
   adicionaTarefa() {
@@ -38,35 +35,45 @@ export class TarefasComponent implements OnInit {
         tarefa_adicionar?.descricao != undefined ||
         tarefa_adicionar?.descricao != null
       ) {
-        this.tarefas.push(tarefa_adicionar);
+        this.tarefasService.criaTarefa(tarefa_adicionar).subscribe((retorno)=>{
+          console.log(retorno);
+          this.atualizaListaTarefas();
+        });
       }
     });
   }
 
   atualizaTarefa(tarefa: Tarefa) {
     let tarefa_enviar = {
+      id: tarefa.id,
       descricao: tarefa.descricao,
       prioridade: tarefa.prioridade,
+      realizado: tarefa.realizado,
     };
     const dialogRef = this.dialog.open(TarefaComponent, {
       width: '25em',
       data: tarefa_enviar,
     });
     dialogRef.afterClosed().subscribe((tarefa_modal) => {
-      this.tarefas.forEach((tarefa_elemento) => {
-        if (tarefa_elemento == tarefa) {
-          tarefa_elemento.descricao = tarefa_modal.descricao;
-          tarefa_elemento.prioridade = tarefa_modal.prioridade;
-        }
+      this.tarefasService.atualizarTarefa(tarefa_modal).subscribe((retorno)=>{
+        console.log(retorno);
+        this.atualizaListaTarefas();
       });
     });
   }
 
-  mudaFinalizado(tarefa: Tarefa){
+  mudaFinalizado(tarefa: Tarefa) {
     tarefa.realizado = !tarefa.realizado;
+    this.tarefasService.atualizarTarefa(tarefa).subscribe((retorno)=>{
+      console.log(retorno);
+      this.atualizaListaTarefas();
+    });
   }
 
   deletaTarefa(tarefa: Tarefa) {
-    this.tarefas.splice(this.tarefas.indexOf(tarefa), 1)
+    this.tarefasService.deletaTarefa(tarefa).subscribe((retorno)=>{
+      console.log(retorno);
+      this.atualizaListaTarefas();
+    });
   }
 }

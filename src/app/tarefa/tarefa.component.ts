@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Tarefa } from '../tarefas/tarefas.component';
+import { Tarefa } from '../tarefas.interface';
 
 @Component({
   selector: 'app-tarefa',
