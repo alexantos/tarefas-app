@@ -17,9 +17,11 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TarefaComponent } from './tarefa/tarefa.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ChartModule } from 'angular2-chartjs';
+import { GraficosComponent } from './graficos/graficos.component';
 
 @NgModule({
-  declarations: [AppComponent, TarefasComponent, TarefaComponent],
+  declarations: [AppComponent, TarefasComponent, TarefaComponent, GraficosComponent],
   imports: [
     FlexLayoutModule,
     BrowserModule,
@@ -35,6 +37,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatChipsModule,
     MatDialogModule,
     MatSelectModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent],
