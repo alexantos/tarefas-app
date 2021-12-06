@@ -32,7 +32,7 @@ export class TarefaComponent implements OnInit {
   salvaTarefa() {
     if (!this.update){
       this.tarefa.data = new Date();
-      this.tarefa.finalizado = false;
+      this.tarefa.realizado = false;
     }
     this.dialogRef.close(this.tarefa);
   }

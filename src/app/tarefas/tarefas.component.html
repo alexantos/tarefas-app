@@ -17,8 +17,8 @@
       <!-- <p fxLayoutAlign="center center" style="margin: 0">{{tarefa.data|date:'dd/MM/yyyy'}}</p> -->
       <div>
         <mat-chip >
-          <mat-icon style="cursor: pointer; color: red" *ngIf="!tarefa.finalizado" (click)="mudaFinalizado(tarefa)">clear</mat-icon>
-          <mat-icon style="cursor: pointer; color: green" *ngIf="tarefa.finalizado" (click)="mudaFinalizado(tarefa)">check</mat-icon>
+          <mat-icon style="cursor: pointer; color: red" *ngIf="!tarefa.realizado" (click)="mudaFinalizado(tarefa)">clear</mat-icon>
+          <mat-icon style="cursor: pointer; color: green" *ngIf="tarefa.realizado" (click)="mudaFinalizado(tarefa)">check</mat-icon>
         </mat-chip>
         <mat-icon style="cursor: pointer; margin-left: 0.5em; margin-right: 0.5em;" (click)="atualizaTarefa(tarefa)">edit</mat-icon>
         <mat-icon style="cursor: pointer" (click)="deletaTarefa(tarefa)">delete</mat-icon>

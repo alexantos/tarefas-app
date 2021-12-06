@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TarefaComponent } from '../tarefa/tarefa.component';
+import { TarefasService } from '../tarefas.service';
 
 export interface Tarefa {
   descricao?: string;
-  finalizado?: boolean;
+  realizado?: boolean;
   data?: Date;
   prioridade?: string;
 }
@@ -17,15 +18,13 @@ export interface Tarefa {
 export class TarefasComponent implements OnInit {
   tarefas: Tarefa[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private tarefasService: TarefasService) {}
 
   ngOnInit(): void {
-    this.tarefas.push({
-      descricao: 'Sistema de tarefas',
-      finalizado: false,
-      data: new Date(),
-      prioridade: 'Tranquila',
-    });
+    this.tarefasService.listaTarefas().subscribe((tarefas) =>{
+      this.tarefas = tarefas;
+    })
+    
   }
 
   adicionaTarefa() {
@@ -64,7 +63,7 @@ export class TarefasComponent implements OnInit {
   }
 
   mudaFinalizado(tarefa: Tarefa){
-    tarefa.finalizado = !tarefa.finalizado;
+    tarefa.realizado = !tarefa.realizado;
   }
 
   deletaTarefa(tarefa: Tarefa) {
