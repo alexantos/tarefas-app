@@ -39,9 +39,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     MatSelectModule,
     ChartModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

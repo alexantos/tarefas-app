@@ -14,7 +14,7 @@ export class TarefasService {
 
     constructor(private http: HttpClient) { }
 
-    listaTarefas(): Observable<any> {
+    listaTarefas() {
         return this.http.get<any>(this.url)
     }
 

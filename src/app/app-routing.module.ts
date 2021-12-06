@@ -4,6 +4,7 @@ import { GraficosComponent } from './graficos/graficos.component';
 import { TarefasComponent } from './tarefas/tarefas.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'tarefas', pathMatch: 'full' },
   { path: 'tarefas', component: TarefasComponent },
   { path: 'graficos', component: GraficosComponent }
 ];

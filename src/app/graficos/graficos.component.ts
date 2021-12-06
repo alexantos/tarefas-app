@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Tarefa } from '../tarefas.interface';
+import { TarefasService } from '../tarefas.service';
 
 @Component({
   selector: 'app-graficos',
@@ -11,7 +13,7 @@ export class GraficosComponent implements OnInit {
 
   grafico_barra: any = {}
 
-  constructor() {
+  constructor(private tarefasService: TarefasService) {
     this.grafico_pizza['type'] = 'pie';
     this.grafico_barra['type'] = 'bar';
   }
@@ -22,24 +24,31 @@ export class GraficosComponent implements OnInit {
   }
 
   constroiGraficoPizza(): void {
-    this.grafico_pizza['data'] = {
-      labels: [
-        'Finalizados',
-        'Não Finalizados'
-      ],
-      datasets: [{
-        label: 'Finalizados',
-        data: [300, 50],
-        backgroundColor: [
-          'rgb(54, 162, 235)',
-          'rgb(255, 99, 132)',
+    let realizado = 0;
+    let total = 0;
+    let nao_realizado = 0;
+    this.tarefasService.listaTarefas().subscribe((tarefas: Tarefa[]) => {
+      total = tarefas.length;
+      realizado = tarefas.filter((tarefa) => tarefa.realizado == true).length;
+      nao_realizado = total - realizado;
+      this.grafico_pizza['data'] = {
+        labels: [
+          'Finalizados',
+          'Não Finalizados'
         ],
-        hoverOffset: 4
-      }]
-    };
+        datasets: [{
+          label: 'Finalizados',
+          data: [realizado, nao_realizado],
+          backgroundColor: [
+            'rgb(54, 162, 235)',
+            'rgb(255, 99, 132)',
+          ],
+          hoverOffset: 4
+        }]
+      };
+    })
     this.grafico_pizza['options'] = {
       responsive: true,
-      maintainAspectRatio: false
     };
   }
 
